@@ -48,6 +48,17 @@
         <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 3%; left: 18%;">
         <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 92%; left: 8%;">
     </div>
+
+    <!-- Bouton musique flottant -->
+    <button class="music-btn" id="musicBtn" onclick="toggleMusic()">
+        🔇
+    </button>
+
+    <!-- YouTube player cache pour la musique -->
+    <iframe id="youtubePlayer" src="https://www.youtube.com/embed/ogk3KOcF4Fc?enablejsapi=1&loop=1&playlist=ogk3KOcF4Fc"
+        allow="autoplay" style="display: none;">
+    </iframe>
+
     <div class="container">
         <header>
             <h1>UNDERCOVER</h1>
@@ -66,6 +77,20 @@
                 <p class="impostors-info" id="impostorsInfo">3 joueurs = 1 imposteur</p>
             </div>
 
+            <!-- Selecteur de mode de jeu -->
+            <div class="mode-select" id="modeSelect">
+                <p class="select-title">Mode de jeu</p>
+                <div class="mode-buttons">
+                    <button class="mode-btn selected" data-mode="random" onclick="setGameMode('random')">
+                        🎲 Aléatoire
+                    </button>
+                    <button class="mode-btn" data-mode="similar" onclick="setGameMode('similar')">
+                        🎯 Similaires
+                    </button>
+                </div>
+                <p class="mode-info" id="modeInfo">Deux cartes complètement différentes</p>
+            </div>
+
             <div class="game-board" id="gameBoard">
                 <!-- Les cartes seront generees dynamiquement -->
             </div>
@@ -80,6 +105,21 @@
         <footer>
             <p id="footerInfo">2 civils - 1 imposteur</p>
         </footer>
+    </div>
+
+    <!-- Modal pour afficher la carte en grand -->
+    <div class="card-modal" id="cardModal" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal()">✕</button>
+            <img class="modal-image" id="modalImage" src="" alt="">
+            <p class="modal-word" id="modalWord"></p>
+            <p class="modal-role" id="modalRole"></p>
+        </div>
+    </div>
+
+    <!-- Splash 67 avant de voir la carte -->
+    <div class="splash-67" id="splash67">
+        <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="splash-67-img" alt="67">
     </div>
 
     <script src="app.js"></script>

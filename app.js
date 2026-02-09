@@ -86,13 +86,91 @@ const CARTES_CLASH_ROYALE = [
     { nom: "Mineur de combat", image: "mighty-miner" }
 ];
 
+// Paires de cartes SIMILAIRES (proches dans le jeu - meme type/mecanique)
+const PAIRES_SIMILAIRES = [
+    // Esprits
+    ["Esprit electrique", "Esprit de feu"],
+    ["Esprit de feu", "Esprit de glace"],
+    ["Esprit electrique", "Esprit de glace"],
+    // Gobelins
+    ["Gobelins", "Gobelins a lances"],
+    ["Gobelins", "Gang de gobelins"],
+    ["Gobelins a lances", "Gang de gobelins"],
+    // Squelettes
+    ["Squelettes", "Armee de squelettes"],
+    ["Squelettes", "Gardes"],
+    ["Armee de squelettes", "Gardes"],
+    // Gargouilles
+    ["Gargouilles", "Horde de gargouilles"],
+    ["Gargouilles", "Mega gargouille"],
+    ["Horde de gargouilles", "Mega gargouille"],
+    // Princes
+    ["Prince", "Prince noir"],
+    ["Prince", "Petit Prince"],
+    ["Prince noir", "Petit Prince"],
+    // Dragons
+    ["Bebe dragon", "Dragon electrique"],
+    ["Dragon electrique", "Dragon de l'enfer"],
+    ["Bebe dragon", "Dragon de l'enfer"],
+    // Geants
+    ["Geant", "Geant electrique"],
+    ["Geant", "Squelette geant"],
+    ["Golem", "Golem de glace"],
+    // Sorciers
+    ["Sorcier", "Sorciere"],
+    ["Sorcier", "Sorcier electrique"],
+    ["Sorcier", "Sorcier de glace"],
+    ["Sorcier electrique", "Sorcier de glace"],
+    // P.E.K.K.A
+    ["P.E.K.K.A", "Mini P.E.K.K.A"],
+    // Chevaliers
+    ["Chevalier", "Mega chevalier"],
+    ["Chevalier", "Chevalier d'or"],
+    ["Mega chevalier", "Chevalier d'or"],
+    // Archers
+    ["Archers", "Archer magique"],
+    ["Archers", "Reine des archers"],
+    ["Archer magique", "Reine des archers"],
+    ["Mousquetaire", "Chasseur"],
+    // Mineurs
+    ["Mineur", "Mineur de combat"],
+    // Beliers
+    ["Belier de combat", "Chevaucheuse de belier"],
+    // Tours defensives
+    ["Canon", "Charrette a canon"],
+    ["Tesla", "Tour de l'enfer"],
+    ["Tour a bombes", "Mortier"],
+    ["Canon", "Tesla"],
+    // Sorts offensifs
+    ["Boule de feu", "Poison"],
+    ["Boule de feu", "Roquette"],
+    ["Foudre", "Roquette"],
+    ["Poison", "Cimetiere"],
+    // Petits sorts
+    ["Electrocution", "Boule de neige geante"],
+    ["Fleches", "Buche"],
+    ["Electrocution", "Fleches"],
+    // Legendaires volants
+    ["Molosse de lave", "Ballon"],
+    ["Princesse", "Archer magique"],
+    // Rois
+    ["Roi des squelettes", "Reine des archers"],
+    // Clones/Miroir
+    ["Clone", "Miroir"],
+    // Rage/Gel
+    ["Rage", "Gel"],
+    // Bandits
+    ["Bandit", "Fantome royal"]
+];
+
 // URL de base pour les images (branche master pour images mises a jour)
 const IMAGE_BASE_URL = "https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards-150-gold/";
 
 // Configuration du jeu
 let gameConfig = {
     playerCount: 3,
-    impostorCount: 1
+    impostorCount: 1,
+    gameMode: 'random' // 'random' ou 'similar'
 };
 
 // Etat du jeu
@@ -122,18 +200,66 @@ function shuffle(array) {
     return arr;
 }
 
+// Trouver une carte par son nom
+function findCardByName(name) {
+    return CARTES_CLASH_ROYALE.find(c => c.nom === name);
+}
+
 function pickCard() {
     return CARTES_CLASH_ROYALE[randomInt(CARTES_CLASH_ROYALE.length)];
 }
 
-// Selectionner 2 cartes differentes
+// Selectionner une paire similaire aleatoire
+function selectSimilarPair() {
+    const pair = PAIRES_SIMILAIRES[randomInt(PAIRES_SIMILAIRES.length)];
+    const card1 = findCardByName(pair[0]);
+    const card2 = findCardByName(pair[1]);
+    // Melanger pour que civil/imposteur soit aleatoire
+    if (randomInt(2) === 0) {
+        return [card1, card2];
+    }
+    return [card2, card1];
+}
+
+// Selectionner 2 cartes differentes selon le mode
 function selectTwoDifferentCards() {
+    if (gameConfig.gameMode === 'similar') {
+        return selectSimilarPair();
+    }
+    // Mode aleatoire classique
     const civilCard = pickCard();
     let impostorCard = pickCard();
     while (impostorCard.nom === civilCard.nom) {
         impostorCard = pickCard();
     }
     return [civilCard, impostorCard];
+}
+
+// Changer le mode de jeu
+function setGameMode(mode) {
+    gameConfig.gameMode = mode;
+
+    // Mettre a jour les boutons
+    document.querySelectorAll('.mode-btn').forEach(btn => {
+        if (btn.dataset.mode === mode) {
+            btn.classList.add('selected');
+        } else {
+            btn.classList.remove('selected');
+        }
+    });
+
+    // Mettre a jour le texte d'info
+    const modeInfo = document.getElementById('modeInfo');
+    if (modeInfo) {
+        if (mode === 'similar') {
+            modeInfo.textContent = "🔥 Cartes proches = plus difficile !";
+        } else {
+            modeInfo.textContent = "Deux cartes complètement différentes";
+        }
+    }
+
+    // Nouvelle partie avec le nouveau mode
+    startNewGame();
 }
 
 // Selectionner le nombre de joueurs
@@ -270,17 +396,92 @@ function revealCard(playerNum) {
         card.classList.add('revealed');
         gameState.revealed[playerNum - 1] = true;
 
-        // Auto-cacher apres 3 secondes
+        // Afficher le splash 67 d'abord
+        showSplash67(() => {
+            // Puis ouvrir la modal avec la carte en grand
+            openModal(playerNum);
+        });
+
+        // Auto-cacher apres 5 secondes (augmente car on regarde la modal)
         setTimeout(() => {
             if (gameState.revealed[playerNum - 1]) {
                 card.classList.remove('revealed');
                 gameState.revealed[playerNum - 1] = false;
             }
-        }, 3000);
+        }, 5000);
     }
+}
+
+// Afficher le splash 67 avant de montrer la carte
+function showSplash67(callback) {
+    const splash = document.getElementById('splash67');
+    splash.classList.add('active');
+
+    // Fermer apres 0.8 secondes et executer le callback
+    setTimeout(() => {
+        splash.classList.remove('active');
+        if (callback) callback();
+    }, 800);
+}
+
+// Ouvrir la modal avec la carte agrandie
+function openModal(playerNum) {
+    const cardData = gameState.cards[playerNum - 1];
+    const isImpostor = gameState.impostorIndices.includes(playerNum - 1);
+
+    const modal = document.getElementById('cardModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalWord = document.getElementById('modalWord');
+    const modalRole = document.getElementById('modalRole');
+
+    // Mettre a jour le contenu
+    modalImage.src = cardData.customUrl ? cardData.image : IMAGE_BASE_URL + cardData.image + ".png";
+    modalImage.alt = cardData.nom;
+    modalWord.textContent = cardData.nom;
+    modalRole.textContent = `Joueur ${playerNum}`;
+
+    // Afficher la modal
+    modal.classList.add('active');
+
+    // Fermer automatiquement apres 2 secondes
+    setTimeout(() => {
+        closeModal();
+    }, 2000);
+}
+
+// Fermer la modal
+function closeModal() {
+    const modal = document.getElementById('cardModal');
+    modal.classList.remove('active');
 }
 
 // Initialiser au chargement
 document.addEventListener('DOMContentLoaded', () => {
     selectPlayers(3); // Par defaut 3 joueurs
 });
+
+// ============================================
+// CONTROLE DE LA MUSIQUE
+// ============================================
+
+let isMusicPlaying = false;
+let youtubePlayer = null;
+
+function toggleMusic() {
+    const btn = document.getElementById('musicBtn');
+    const iframe = document.getElementById('youtubePlayer');
+
+    if (!isMusicPlaying) {
+        // Demarrer la musique
+        iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+        btn.textContent = '🔊';
+        btn.classList.add('playing');
+        isMusicPlaying = true;
+    } else {
+        // Arreter la musique
+        iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+        btn.textContent = '🔇';
+        btn.classList.remove('playing');
+        isMusicPlaying = false;
+    }
+}
