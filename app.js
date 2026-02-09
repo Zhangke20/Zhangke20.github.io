@@ -402,13 +402,13 @@ function revealCard(playerNum) {
             openModal(playerNum);
         });
 
-        // Auto-cacher apres 5 secondes (augmente car on regarde la modal)
+        // Auto-cacher: splash(0.8s) + modal(2s) + delai(0.2s) = 3s
         setTimeout(() => {
             if (gameState.revealed[playerNum - 1]) {
                 card.classList.remove('revealed');
                 gameState.revealed[playerNum - 1] = false;
             }
-        }, 5000);
+        }, 3000);
     }
 }
 
