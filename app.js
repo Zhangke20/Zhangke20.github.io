@@ -59,7 +59,7 @@ const TRANSLATIONS = {
             "",
             "\ud83c\udfc6 <strong>Victoire :</strong>",
             "\u2022 Civils gagnent si tous les imposteurs sont \u00e9limin\u00e9s",
-            "\u2022 Imposteurs gagnent s'ils sont plus nombreux que les civils restants !"
+            "\u2022 Imposteurs gagnent si tous les civils sont \u00e9limin\u00e9s ou s'il ne reste qu'1 civil !"
         ],
 
         // Noms des cartes
@@ -206,7 +206,7 @@ const TRANSLATIONS = {
             "",
             "\ud83c\udfc6 <strong>Victory:</strong>",
             "\u2022 Civilians win if all impostors are eliminated",
-            "\u2022 Impostors win if they outnumber remaining civilians!"
+            "\u2022 Impostors win if all civilians are eliminated or only 1 remains!"
         ],
 
         // Noms des cartes
@@ -1107,7 +1107,8 @@ function checkWinCondition() {
     }
 
     if (aliveImpostors === 0) return 'civils';
-    if (aliveImpostors >= aliveCivils) return 'impostors';
+    if (aliveCivils === 0) return 'impostors';
+    if (aliveCivils === 1 && aliveImpostors >= 1) return 'impostors';
     return null;
 }
 
