@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Undercover - Clash Royale</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Supercell+Magic:wght@400;700&family=Outfit:wght@400;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Floating 67 memes -->
+    <div class="meme-bg">
+        <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 5%; left: 5%;">
+        <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 10%; right: 8%;">
+        <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 30%; left: 2%;">
+        <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 25%; right: 3%;">
+        <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 50%; left: 4%;">
+        <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 55%; right: 5%;">
+        <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 75%; left: 6%;">
+        <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 80%; right: 4%;">
+        <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67"
+            style="bottom: 5%; left: 15%;">
+        <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67"
+            style="bottom: 8%; right: 12%;">
+        <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 20%; left: 12%;">
+        <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 40%; left: 10%;">
+        <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 35%; right: 12%;">
+        <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 65%; right: 10%;">
+        <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 15%; left: 22%;">
+        <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 45%; left: 20%;">
+        <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 25%; right: 22%;">
+        <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 70%; right: 20%;">
+        <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 60%; left: 15%;">
+        <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 85%; left: 22%;">
+        <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 48%; right: 18%;">
+        <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 90%; right: 22%;">
+        <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 3%; left: 18%;">
+        <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 92%; left: 8%;">
+    </div>
+
+    <!-- Boutons flottants en haut -->
+    <button class="music-btn" id="musicBtn" onclick="toggleMusic()">🔇</button>
+    <button class="rules-btn" id="rulesBtn" onclick="toggleRulesModal()">Règles</button>
+    
+    <!-- Sélecteur de langue sous le bouton règles -->
+    <div class="lang-select" id="langSelect">
+        <button class="lang-btn selected" data-lang="fr" onclick="setLanguage('fr')">🇫🇷 FR</button>
+        <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">🇬🇧 EN</button>
+    </div>
+
+    <!-- YouTube player caché -->
+    <iframe id="youtubePlayer" src="https://www.youtube.com/embed/ogk3KOcF4Fc?enablejsapi=1&loop=1&playlist=ogk3KOcF4Fc"
+        allow="autoplay" style="display: none;">
+    </iframe>
+
+    <div class="container">
+        <header>
+            <h1>UNDERCOVER</h1>
+            <p class="subtitle">Clash Royale Edition</p>
+        </header>
+
+        <main>
+            <!-- Section Paramètres - Joueurs et Mode -->
+            <div class="settings-section" id="settingsSection">
+                <div class="settings-row">
+                    <div class="setting-group">
+                        <p class="select-title" id="playersLabel">Joueurs</p>
+                        <div class="select-buttons">
+                            <button class="select-btn" onclick="selectPlayers(3)">3</button>
+                            <button class="select-btn" onclick="selectPlayers(4)">4</button>
+                            <button class="select-btn" onclick="selectPlayers(5)">5</button>
+                        </div>
+                    </div>
+                    <div class="setting-group">
+                        <p class="select-title" id="modeLabel">Mode</p>
+                        <div class="mode-buttons">
+                            <button class="mode-btn selected" data-mode="random" onclick="setGameMode('random')" title="Aléatoire">🎲</button>
+                            <button class="mode-btn" data-mode="similar" onclick="setGameMode('similar')" title="Similaires">🎯</button>
+                        </div>
+                    </div>
+                </div>
+                <p class="impostors-info" id="impostorsInfo">3 joueurs = 1 imposteur</p>
+                <p class="mode-info" id="modeInfo">Deux cartes complètement différentes</p>
+            </div>
+
+            <div class="game-board" id="gameBoard"></div>
+
+            <p class="starting-player" id="startingPlayer">Le joueur 1 commence !</p>
+
+            <button class="new-game-btn" id="newGameBtn" onclick="startNewGame()">Nouvelle partie</button>
+        </main>
+
+        <footer>
+            <p id="footerInfo">2 civils - 1 imposteur</p>
+        </footer>
+    </div>
+
+    <!-- Modal pour afficher la carte en grand -->
+    <div class="card-modal" id="cardModal" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal()">✕</button>
+            <img class="modal-image" id="modalImage" src="" alt="">
+            <p class="modal-word" id="modalWord"></p>
+            <p class="modal-role" id="modalRole"></p>
+        </div>
+    </div>
+
+    <!-- Modal pour les règles -->
+    <div class="rules-modal" id="rulesModal" onclick="toggleRulesModal()">
+        <div class="rules-content" onclick="event.stopPropagation()">
+            <button class="rules-close" onclick="toggleRulesModal()">✕</button>
+            <h2 id="rulesTitle">📜 Règles du jeu</h2>
+            <div class="rules-text" id="rulesContent">
+                🎯 <strong>But du jeu :</strong><br>
+                • Les <strong>civils</strong> doivent identifier et éliminer l'imposteur<br>
+                • L'<strong>imposteur</strong> doit bluffer et se faire passer pour un civil<br><br>
+                🎮 <strong>Déroulement :</strong><br>
+                1. Chaque joueur reçoit secrètement une carte Clash Royale<br>
+                2. Tous les civils ont la MÊME carte<br>
+                3. L'imposteur a une carte DIFFÉRENTE (proche en mode Similaire)<br>
+                4. Les joueurs décrivent leur carte sans la nommer directement<br>
+                5. Votez pour éliminer qui vous pensez être l'imposteur !<br><br>
+                🏆 <strong>Victoire :</strong><br>
+                • Civils gagnent si l'imposteur est éliminé<br>
+                • L'imposteur gagne s'il survit ou si les civils s'accusent entre eux !
+            </div>
+            <button class="rules-close-btn" id="rulesClose" onclick="toggleRulesModal()">Fermer</button>
+        </div>
+    </div>
+
+    <!-- Splash 67 -->
+    <div class="splash-67" id="splash67">
+        <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="splash-67-img" alt="67">
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
