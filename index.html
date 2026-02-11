@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 
 <head>
@@ -30,17 +30,14 @@
             style="bottom: 5%; left: 15%;">
         <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67"
             style="bottom: 8%; right: 12%;">
-        <!-- 4 nouveaux memes plus eloignes des bords -->
         <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 20%; left: 12%;">
         <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 40%; left: 10%;">
         <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 35%; right: 12%;">
         <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 65%; right: 10%;">
-        <!-- 4 memes a 20-25% des bords -->
         <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 15%; left: 22%;">
         <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 45%; left: 20%;">
         <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 25%; right: 22%;">
         <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 70%; right: 20%;">
-        <!-- 6 memes pour boucher les trous -->
         <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 60%; left: 15%;">
         <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 85%; left: 22%;">
         <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 48%; right: 18%;">
@@ -49,9 +46,13 @@
         <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 92%; left: 8%;">
     </div>
 
-    <!-- Bouton musique flottant -->
+    <!-- Boutons flottants -->
     <button class="music-btn" id="musicBtn" onclick="toggleMusic()">
         🔇
+    </button>
+    
+    <button class="rules-btn" id="rulesBtn" onclick="toggleRulesModal()">
+        Règles
     </button>
 
     <!-- YouTube player cache pour la musique -->
@@ -66,6 +67,19 @@
         </header>
 
         <main>
+            <!-- Sélecteur de langue -->
+            <div class="lang-select" id="langSelect">
+                <p class="select-title">Langue / Language</p>
+                <div class="lang-buttons">
+                    <button class="lang-btn selected" data-lang="fr" onclick="setLanguage('fr')">
+                        🇫🇷 FR
+                    </button>
+                    <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">
+                        🇬🇧 EN
+                    </button>
+                </div>
+            </div>
+
             <!-- Menu de selection du nombre de joueurs -->
             <div class="player-select" id="playerSelect">
                 <p class="select-title">Nombre de joueurs</p>
@@ -82,13 +96,13 @@
                 <p class="select-title">Mode de jeu</p>
                 <div class="mode-buttons">
                     <button class="mode-btn selected" data-mode="random" onclick="setGameMode('random')">
-                        &#x1F3B2; Al&eacute;atoire
+                        🎲 Aléatoire
                     </button>
                     <button class="mode-btn" data-mode="similar" onclick="setGameMode('similar')">
-                        &#x1F3AF; Similaires
+                        🎯 Similaires
                     </button>
                 </div>
-                <p class="mode-info" id="modeInfo">Deux cartes compl&egrave;tement diff&eacute;rentes</p>
+                <p class="mode-info" id="modeInfo">Deux cartes complètement différentes</p>
             </div>
 
             <div class="game-board" id="gameBoard">
@@ -114,6 +128,29 @@
             <img class="modal-image" id="modalImage" src="" alt="">
             <p class="modal-word" id="modalWord"></p>
             <p class="modal-role" id="modalRole"></p>
+        </div>
+    </div>
+
+    <!-- Modal pour les règles -->
+    <div class="rules-modal" id="rulesModal" onclick="toggleRulesModal()">
+        <div class="rules-content" onclick="event.stopPropagation()">
+            <button class="rules-close" onclick="toggleRulesModal()">✕</button>
+            <h2 id="rulesTitle">📜 Règles du jeu</h2>
+            <div class="rules-text" id="rulesContent">
+                🎯 <strong>But du jeu :</strong><br>
+                • Les <strong>civils</strong> doivent identifier et éliminer l'imposteur<br>
+                • L'<strong>imposteur</strong> doit bluffer et se faire passer pour un civil<br><br>
+                🎮 <strong>Déroulement :</strong><br>
+                1. Chaque joueur reçoit secrètement une carte Clash Royale<br>
+                2. Tous les civils ont la MÊME carte<br>
+                3. L'imposteur a une carte DIFFÉRENTE (proche en mode Similaire)<br>
+                4. Les joueurs décrivent leur carte sans la nommer directement<br>
+                5. Votez pour éliminer qui vous pensez être l'imposteur !<br><br>
+                🏆 <strong>Victoire :</strong><br>
+                • Civils gagnent si l'imposteur est éliminé<br>
+                • L'imposteur gagne s'il survit ou si les civils s'accusent entre eux !
+            </div>
+            <button class="rules-close-btn" id="rulesClose" onclick="toggleRulesModal()">Fermer</button>
         </div>
     </div>
 

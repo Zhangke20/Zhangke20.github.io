@@ -1,4 +1,397 @@
-﻿// Liste de cartes Clash Royale avec mapping vers les images
+// ============================================
+// SYSTEME DE TRADUCTION
+// ============================================
+
+const TRANSLATIONS = {
+    fr: {
+        // Interface
+        title: "UNDERCOVER",
+        subtitle: "Clash Royale Edition",
+        playerCount: "Nombre de joueurs",
+        gameMode: "Mode de jeu",
+        randomMode: "🎲 Aléatoire",
+        similarMode: "🎯 Similaires",
+        randomInfo: "Deux cartes complètement différentes",
+        similarInfo: "🔥 Cartes proches = plus difficile !",
+        tapToSee: "Appuie pour voir",
+        newGame: "Nouvelle partie",
+        letsGo: "C'est parti !",
+        startingPlayer: "🎯 Le joueur {0} commence !",
+        rules: "Règles",
+        close: "Fermer",
+        player: "Joueur",
+        civil: "civil",
+        civils: "civils",
+        impostor: "imposteur",
+        impostors: "imposteurs",
+        playersInfo: "{0} joueurs = {1} imposteur",
+        playersInfoPlural: "{0} joueurs = {1} imposteurs",
+        footerInfo: "{0} {1} - {2} {3}",
+        
+        // Règles du jeu
+        rulesTitle: "📜 Règles du jeu",
+        rulesText: [
+            "🎯 <strong>But du jeu :</strong>",
+            "• Les <strong>civils</strong> doivent identifier et éliminer l'imposteur",
+            "• L'<strong>imposteur</strong> doit bluffer et se faire passer pour un civil",
+            "",
+            "🎮 <strong>Déroulement :</strong>",
+            "1. Chaque joueur reçoit secrètement une carte Clash Royale",
+            "2. Tous les civils ont la MÊME carte",
+            "3. L'imposteur a une carte DIFFÉRENTE (proche en mode Similaire)",
+            "4. Les joueurs décrivent leur carte sans la nommer directement",
+            "5. Votez pour éliminer qui vous pensez être l'imposteur !",
+            "",
+            "🏆 <strong>Victoire :</strong>",
+            "• Civils gagnent si l'imposteur est éliminé",
+            "• L'imposteur gagne s'il survit ou si les civils s'accusent entre eux !"
+        ],
+        
+        // Noms des cartes
+        cards: {
+            "Archers": "Archers",
+            "Barbares": "Barbares",
+            "Chauves-souris": "Chauves-souris",
+            "Bombardier": "Bombardier",
+            "Esprit electrique": "Esprit électrique",
+            "Esprit de feu": "Esprit de feu",
+            "Esprit de glace": "Esprit de glace",
+            "Chevalier": "Chevalier",
+            "Gobelins": "Gobelins",
+            "Gobelins a lances": "Gobelins à lances",
+            "Gang de gobelins": "Gang de gobelins",
+            "Squelettes": "Squelettes",
+            "Armee de squelettes": "Armée de squelettes",
+            "Gargouilles": "Gargouilles",
+            "Horde de gargouilles": "Horde de gargouilles",
+            "Recrues royales": "Recrues royales",
+            "Gardes": "Gardes",
+            "Canon": "Canon",
+            "Mortier": "Mortier",
+            "Tesla": "Tesla",
+            "Fleches": "Flèches",
+            "Boule de neige geante": "Boule de neige géante",
+            "Electrocution": "Électrocution",
+            "Colis royal": "Colis royal",
+            "Geant": "Géant",
+            "Mini P.E.K.K.A": "Mini P.E.K.K.A",
+            "Mousquetaire": "Mousquetaire",
+            "Valkyrie": "Valkyrie",
+            "Sorcier": "Sorcier",
+            "Chevaucheur de cochon": "Chevaucheur de cochon",
+            "Golem de glace": "Golem de glace",
+            "Belier de combat": "Bélier de combat",
+            "Chevaucheuse de belier": "Chevaucheuse de bélier",
+            "Chasseur": "Chasseur",
+            "Bebe dragon": "Bébé dragon",
+            "Ballon": "Ballon",
+            "Bourreau": "Bourreau",
+            "Prince": "Prince",
+            "Prince noir": "Prince noir",
+            "Dragon electrique": "Dragon électrique",
+            "Geant electrique": "Géant électrique",
+            "Squelette geant": "Squelette géant",
+            "Golem": "Golem",
+            "P.E.K.K.A": "P.E.K.K.A",
+            "Sorciere": "Sorcière",
+            "Brise-murs": "Brise-murs",
+            "Bouliste": "Bouliste",
+            "Arbalete X": "Arbalète X",
+            "Foreuse a gobelins": "Foreuse à gobelins",
+            "Charrette a canon": "Charrette à canon",
+            "Foudre": "Foudre",
+            "Rage": "Rage",
+            "Gel": "Gel",
+            "Tornade": "Tornade",
+            "Poison": "Poison",
+            "Boule de feu": "Boule de feu",
+            "Roquette": "Roquette",
+            "Buche": "Bûche",
+            "Cimetiere": "Cimetière",
+            "Dragon de l'enfer": "Dragon de l'enfer",
+            "Molosse de lave": "Molosse de lave",
+            "Fantome royal": "Fantôme royal",
+            "Bucheron": "Bûcheron",
+            "Mega chevalier": "Méga chevalier",
+            "Princesse": "Princesse",
+            "Bandit": "Bandit",
+            "Mineur": "Mineur",
+            "Archer magique": "Archer magique",
+            "Sorcier electrique": "Sorcier électrique",
+            "Sorcier de glace": "Sorcier de glace",
+            "Roi des squelettes": "Roi des squelettes",
+            "Reine des archers": "Reine des archers",
+            "Moine": "Moine",
+            "Petit Prince": "Petit Prince",
+            "Sparky": "Sparky",
+            "Phoenix": "Phoenix",
+            "Mega gargouille": "Méga gargouille",
+            "Tour a bombes": "Tour à bombes",
+            "Fournaise": "Fournaise",
+            "Tour de l'enfer": "Tour de l'enfer",
+            "Clone": "Clone",
+            "Miroir": "Miroir",
+            "Chevalier d'or": "Chevalier d'or",
+            "Mineur de combat": "Mineur de combat"
+        }
+    },
+    en: {
+        // Interface
+        title: "UNDERCOVER",
+        subtitle: "Clash Royale Edition",
+        playerCount: "Number of players",
+        gameMode: "Game mode",
+        randomMode: "🎲 Random",
+        similarMode: "🎯 Similar",
+        randomInfo: "Two completely different cards",
+        similarInfo: "🔥 Close cards = harder!",
+        tapToSee: "Tap to see",
+        newGame: "New game",
+        letsGo: "Let's go!",
+        startingPlayer: "🎯 Player {0} starts!",
+        rules: "Rules",
+        close: "Close",
+        player: "Player",
+        civil: "civilian",
+        civils: "civilians",
+        impostor: "impostor",
+        impostors: "impostors",
+        playersInfo: "{0} players = {1} impostor",
+        playersInfoPlural: "{0} players = {1} impostors",
+        footerInfo: "{0} {1} - {2} {3}",
+        
+        // Règles du jeu
+        rulesTitle: "📜 Game Rules",
+        rulesText: [
+            "🎯 <strong>Objective:</strong>",
+            "• <strong>Civilians</strong> must identify and eliminate the impostor",
+            "• The <strong>impostor</strong> must bluff and pretend to be a civilian",
+            "",
+            "🎮 <strong>How to play:</strong>",
+            "1. Each player secretly receives a Clash Royale card",
+            "2. All civilians have the SAME card",
+            "3. The impostor has a DIFFERENT card (close one in Similar mode)",
+            "4. Players describe their card without naming it directly",
+            "5. Vote to eliminate who you think is the impostor!",
+            "",
+            "🏆 <strong>Victory:</strong>",
+            "• Civilians win if the impostor is eliminated",
+            "• The impostor wins if they survive or if civilians accuse each other!"
+        ],
+        
+        // Noms des cartes
+        cards: {
+            "Archers": "Archers",
+            "Barbares": "Barbarians",
+            "Chauves-souris": "Bats",
+            "Bombardier": "Bomber",
+            "Esprit electrique": "Electro Spirit",
+            "Esprit de feu": "Fire Spirit",
+            "Esprit de glace": "Ice Spirit",
+            "Chevalier": "Knight",
+            "Gobelins": "Goblins",
+            "Gobelins a lances": "Spear Goblins",
+            "Gang de gobelins": "Goblin Gang",
+            "Squelettes": "Skeletons",
+            "Armee de squelettes": "Skeleton Army",
+            "Gargouilles": "Minions",
+            "Horde de gargouilles": "Minion Horde",
+            "Recrues royales": "Royal Recruits",
+            "Gardes": "Guards",
+            "Canon": "Cannon",
+            "Mortier": "Mortar",
+            "Tesla": "Tesla",
+            "Fleches": "Arrows",
+            "Boule de neige geante": "Giant Snowball",
+            "Electrocution": "Zap",
+            "Colis royal": "Royal Delivery",
+            "Geant": "Giant",
+            "Mini P.E.K.K.A": "Mini P.E.K.K.A",
+            "Mousquetaire": "Musketeer",
+            "Valkyrie": "Valkyrie",
+            "Sorcier": "Wizard",
+            "Chevaucheur de cochon": "Hog Rider",
+            "Golem de glace": "Ice Golem",
+            "Belier de combat": "Battle Ram",
+            "Chevaucheuse de belier": "Ram Rider",
+            "Chasseur": "Hunter",
+            "Bebe dragon": "Baby Dragon",
+            "Ballon": "Balloon",
+            "Bourreau": "Executioner",
+            "Prince": "Prince",
+            "Prince noir": "Dark Prince",
+            "Dragon electrique": "Electro Dragon",
+            "Geant electrique": "Electro Giant",
+            "Squelette geant": "Giant Skeleton",
+            "Golem": "Golem",
+            "P.E.K.K.A": "P.E.K.K.A",
+            "Sorciere": "Witch",
+            "Brise-murs": "Wall Breakers",
+            "Bouliste": "Bowler",
+            "Arbalete X": "X-Bow",
+            "Foreuse a gobelins": "Goblin Drill",
+            "Charrette a canon": "Cannon Cart",
+            "Foudre": "Lightning",
+            "Rage": "Rage",
+            "Gel": "Freeze",
+            "Tornade": "Tornado",
+            "Poison": "Poison",
+            "Boule de feu": "Fireball",
+            "Roquette": "Rocket",
+            "Buche": "The Log",
+            "Cimetiere": "Graveyard",
+            "Dragon de l'enfer": "Inferno Dragon",
+            "Molosse de lave": "Lava Hound",
+            "Fantome royal": "Royal Ghost",
+            "Bucheron": "Lumberjack",
+            "Mega chevalier": "Mega Knight",
+            "Princesse": "Princess",
+            "Bandit": "Bandit",
+            "Mineur": "Miner",
+            "Archer magique": "Magic Archer",
+            "Sorcier electrique": "Electro Wizard",
+            "Sorcier de glace": "Ice Wizard",
+            "Roi des squelettes": "Skeleton King",
+            "Reine des archers": "Archer Queen",
+            "Moine": "Monk",
+            "Petit Prince": "Little Prince",
+            "Sparky": "Sparky",
+            "Phoenix": "Phoenix",
+            "Mega gargouille": "Mega Minion",
+            "Tour a bombes": "Bomb Tower",
+            "Fournaise": "Furnace",
+            "Tour de l'enfer": "Inferno Tower",
+            "Clone": "Clone",
+            "Miroir": "Mirror",
+            "Chevalier d'or": "Golden Knight",
+            "Mineur de combat": "Mighty Miner"
+        }
+    }
+};
+
+// Langue actuelle
+let currentLanguage = 'fr';
+
+// Fonction pour obtenir une traduction
+function t(key, ...args) {
+    const translations = TRANSLATIONS[currentLanguage];
+    let text = translations[key] || key;
+    
+    // Remplacer les placeholders {0}, {1}, etc.
+    args.forEach((arg, index) => {
+        text = text.replace(`{${index}}`, arg);
+    });
+    
+    return text;
+}
+
+// Fonction pour traduire le nom d'une carte
+function translateCardName(frenchName) {
+    return TRANSLATIONS[currentLanguage].cards[frenchName] || frenchName;
+}
+
+// Changer la langue
+function setLanguage(lang) {
+    currentLanguage = lang;
+    
+    // Mettre à jour les boutons de langue
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        if (btn.dataset.lang === lang) {
+            btn.classList.add('selected');
+        } else {
+            btn.classList.remove('selected');
+        }
+    });
+    
+    // Mettre à jour tous les textes de l'interface
+    updateInterface();
+    
+    // Sauvegarder la préférence
+    localStorage.setItem('undercover-language', lang);
+}
+
+// Mettre à jour l'interface avec la langue actuelle
+function updateInterface() {
+    // Titres
+    document.querySelector('h1').textContent = t('title');
+    document.querySelector('.subtitle').textContent = t('subtitle');
+    
+    // Sélection joueurs
+    document.querySelector('#playerSelect .select-title').textContent = t('playerCount');
+    
+    // Sélection mode
+    document.querySelector('#modeSelect .select-title').textContent = t('gameMode');
+    document.querySelector('.mode-btn[data-mode="random"]').textContent = t('randomMode');
+    document.querySelector('.mode-btn[data-mode="similar"]').textContent = t('similarMode');
+    
+    // Info mode
+    const modeInfo = document.getElementById('modeInfo');
+    if (modeInfo) {
+        if (gameConfig.gameMode === 'similar') {
+            modeInfo.textContent = t('similarInfo');
+        } else {
+            modeInfo.textContent = t('randomInfo');
+        }
+    }
+    
+    // Texte des cartes
+    document.querySelectorAll('.tap-text').forEach(el => {
+        el.textContent = t('tapToSee');
+    });
+    
+    // Bouton nouvelle partie
+    const newGameBtn = document.getElementById('newGameBtn');
+    if (newGameBtn && !newGameBtn.textContent.includes("parti") && !newGameBtn.textContent.includes("go")) {
+        newGameBtn.textContent = t('newGame');
+    }
+    
+    // Info imposteurs
+    updateImpostorInfo();
+    
+    // Joueur qui commence
+    const startingEl = document.getElementById('startingPlayer');
+    if (startingEl && startingEl.textContent.includes('joueur') || startingEl.textContent.includes('Player')) {
+        const match = startingEl.textContent.match(/\d+/);
+        if (match) {
+            startingEl.textContent = t('startingPlayer', match[0]);
+        }
+    }
+    
+    // Mettre à jour les noms des cartes affichées
+    for (let i = 1; i <= gameConfig.playerCount; i++) {
+        const wordEl = document.getElementById(`word${i}`);
+        if (wordEl && gameState.cards[i - 1]) {
+            wordEl.textContent = translateCardName(gameState.cards[i - 1].nom);
+        }
+    }
+    
+    // Bouton règles
+    const rulesBtn = document.getElementById('rulesBtn');
+    if (rulesBtn) {
+        rulesBtn.textContent = t('rules');
+    }
+    
+    // Modal règles
+    const rulesTitle = document.getElementById('rulesTitle');
+    if (rulesTitle) {
+        rulesTitle.textContent = t('rulesTitle');
+    }
+    
+    const rulesContent = document.getElementById('rulesContent');
+    if (rulesContent) {
+        rulesContent.innerHTML = t('rulesText').join('<br>');
+    }
+    
+    const rulesClose = document.getElementById('rulesClose');
+    if (rulesClose) {
+        rulesClose.textContent = t('close');
+    }
+}
+
+// ============================================
+// LISTE DES CARTES
+// ============================================
+
 const CARTES_CLASH_ROYALE = [
     { nom: "Archers", image: "archers" },
     { nom: "Barbares", image: "barbarians" },
@@ -160,27 +553,138 @@ const PAIRES_SIMILAIRES = [
     // Rage/Gel
     ["Rage", "Gel"],
     // Bandits
-    ["Bandit", "Fantome royal"]
+    ["Bandit", "Fantome royal"],
+
+    // ========== NOUVELLES PAIRES - MOUVEMENT & POSITIONNEMENT ==========
+    ["Chevaucheur de cochon", "Brise-murs"],
+    ["Ballon", "Brise-murs"],
+    ["Belier de combat", "Chevaucheur de cochon"],
+    ["Foreuse a gobelins", "Mineur"],
+    ["Fantome royal", "Bandit"],
+    ["Princesse", "Mousquetaire"],
+    ["Archer magique", "Princesse"],
+    ["Chasseur", "Prince"],
+    ["Valkyrie", "Bouliste"],
+    ["Sorciere", "Cimetiere"],
+    ["Roi des squelettes", "Sorciere"],
+
+    // ========== NOUVELLES PAIRES - TANKS & BULLES ==========
+    ["Geant", "Golem"],
+    ["Geant", "Golem de glace"],
+    ["Golem de glace", "Geant electrique"],
+    ["Geant electrique", "Squelette geant"],
+    ["Mega chevalier", "Valkyrie"],
+    ["Mega chevalier", "P.E.K.K.A"],
+    ["P.E.K.K.A", "Prince"],
+    ["Mini P.E.K.K.A", "Prince"],
+    ["Chevalier", "Valkyrie"],
+    ["Gardes", "Barbares"],
+
+    // ========== NOUVELLES PAIRES - BATIMENTS DEFENSIFS ==========
+    ["Canon", "Tour de l'enfer"],
+    ["Tour a bombes", "Fournaise"],
+    ["Fournaise", "Tesla"],
+    ["Mortier", "Canon"],
+    ["Charrette a canon", "Canon"],
+    ["Fournaise", "Cimetiere"],
+    ["Tour de l'enfer", "Dragon de l'enfer"],
+    ["Tour a bombes", "Mortier"],
+
+    // ========== NOUVELLES PAIRES - SORTS & CONTROLE ==========
+    ["Tornade", "Gel"],
+    ["Tornade", "Boule de neige geante"],
+    ["Gel", "Rage"],
+    ["Poison", "Tornade"],
+    ["Foudre", "Boule de feu"],
+    ["Electrocution", "Foudre"],
+    ["Buche", "Boule de neige geante"],
+    ["Clone", "Rage"],
+    ["Miroir", "Clone"],
+    ["Fleches", "Poison"],
+
+    // ========== NOUVELLES PAIRES - UNITES AERIENNES ==========
+    ["Bebe dragon", "Molosse de lave"],
+    ["Dragon electrique", "Dragon de l'enfer"],
+    ["Horde de gargouilles", "Molosse de lave"],
+    ["Ballon", "Molosse de lave"],
+    ["Phoenix", "Bebe dragon"],
+    ["Phoenix", "Dragon de l'enfer"],
+    ["Gargouilles", "Squelettes"],
+
+    // ========== NOUVELLES PAIRES - SQUELETTES & MORT-VIVANTS ==========
+    ["Squelettes", "Gardes"],
+    ["Armee de squelettes", "Gang de gobelins"],
+    ["Squelette geant", "Bombardier"],
+    ["Cimetiere", "Sorciere"],
+
+    // ========== NOUVELLES PAIRES - UNITES ROYALES ==========
+    ["Reine des archers", "Roi des squelettes"],
+    ["Chevalier d'or", "Mega chevalier"],
+    ["Princesse", "Archer magique"],
+    ["Prince", "Prince noir"],
+    ["Princesse", "Reine des archers"],
+    ["Petit Prince", "Prince"],
+
+    // ========== NOUVELLES PAIRES - MECANIQUES SPECIALES ==========
+    ["Sparky", "Buche"],
+    ["Sparky", "Ballon"],
+    ["Mineur", "Foreuse a gobelins"],
+    ["Buche", "Brise-murs"],
+    ["Bourreau", "Bouliste"],
+    ["Sparky", "P.E.K.K.A"],
+    ["Molosse de lave", "Golem"],
+    ["Phoenix", "Squelette geant"],
+    ["Moine", "Bandit"],
+
+    // ========== NOUVELLES PAIRES - COMBOS DE META ==========
+    ["Ballon", "Geant"],
+    ["P.E.K.K.A", "Sorcier electrique"],
+    ["Golem", "Dragon de l'enfer"],
+    ["Mortier", "Archers"],
+    ["Arbalete X", "Tesla"],
+    ["Chevaucheur de cochon", "Boule de feu"],
+    ["Mineur", "Poison"],
+    ["Barbares", "Canon"],
+
+    // ========== NOUVELLES PAIRES - MEME COUT (strategique) ==========
+    ["Chevalier", "Golem de glace"],
+    ["Archers", "Gargouilles"],
+    ["Mini P.E.K.K.A", "Valkyrie"],
+    ["Mousquetaire", "Chasseur"],
+    ["Bebe dragon", "Sorcier"],
+    ["Prince", "Ballon"],
+    ["Geant", "Sorciere"],
+    ["P.E.K.K.A", "Golem"],
+
+    // ========== NOUVELLES PAIRES - EFFETS DE STATUT ==========
+    ["Sorcier electrique", "Electrocution"],
+    ["Dragon electrique", "Electrocution"],
+    ["Sorcier de glace", "Golem de glace"],
+    ["Tornade", "Golem de glace"],
+    ["Poison", "Sorciere"],
+    ["Rage", "Bucheron"],
+    ["Gel", "Sorcier de glace"],
+    ["Geant electrique", "Sorcier electrique"]
 ];
 
-// URL de base pour les images (branche master pour images mises a jour)
+// URL de base pour les images
 const IMAGE_BASE_URL = "https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards-150-gold/";
 
 // Configuration du jeu
 let gameConfig = {
     playerCount: 3,
     impostorCount: 1,
-    gameMode: 'random' // 'random' ou 'similar'
+    gameMode: 'random'
 };
 
 // Etat du jeu
 let gameState = {
-    cards: [],  // Contient { nom, image } pour chaque joueur
+    cards: [],
     impostorIndices: [],
     revealed: []
 };
 
-// Random robuste (crypto si dispo)
+// Random robuste
 function randomInt(max) {
     if (window.crypto && window.crypto.getRandomValues) {
         const array = new Uint32Array(1);
@@ -214,7 +718,6 @@ function selectSimilarPair() {
     const pair = PAIRES_SIMILAIRES[randomInt(PAIRES_SIMILAIRES.length)];
     const card1 = findCardByName(pair[0]);
     const card2 = findCardByName(pair[1]);
-    // Melanger pour que civil/imposteur soit aleatoire
     if (randomInt(2) === 0) {
         return [card1, card2];
     }
@@ -226,7 +729,6 @@ function selectTwoDifferentCards() {
     if (gameConfig.gameMode === 'similar') {
         return selectSimilarPair();
     }
-    // Mode aleatoire classique
     const civilCard = pickCard();
     let impostorCard = pickCard();
     while (impostorCard.nom === civilCard.nom) {
@@ -239,7 +741,6 @@ function selectTwoDifferentCards() {
 function setGameMode(mode) {
     gameConfig.gameMode = mode;
 
-    // Mettre a jour les boutons
     document.querySelectorAll('.mode-btn').forEach(btn => {
         if (btn.dataset.mode === mode) {
             btn.classList.add('selected');
@@ -248,17 +749,7 @@ function setGameMode(mode) {
         }
     });
 
-    // Mettre a jour le texte d'info
-    const modeInfo = document.getElementById('modeInfo');
-    if (modeInfo) {
-        if (mode === 'similar') {
-            modeInfo.textContent = "🔥 Cartes proches = plus difficile !";
-        } else {
-            modeInfo.textContent = "Deux cartes complètement différentes";
-        }
-    }
-
-    // Nouvelle partie avec le nouveau mode
+    updateInterface();
     startNewGame();
 }
 
@@ -266,17 +757,14 @@ function setGameMode(mode) {
 function selectPlayers(count) {
     gameConfig.playerCount = count;
 
-    // 3 ou 4 joueurs = 1 imposteur, 5 joueurs = 2 imposteurs
     if (count === 5) {
         gameConfig.impostorCount = 2;
     } else {
         gameConfig.impostorCount = 1;
     }
 
-    // Mettre a jour les infos affichees
     updateImpostorInfo();
 
-    // Mettre a jour les boutons de selection
     document.querySelectorAll('.select-btn').forEach((btn, index) => {
         const btnCount = index + 3;
         if (btnCount === count) {
@@ -286,10 +774,7 @@ function selectPlayers(count) {
         }
     });
 
-    // Generer les cartes joueurs
     generatePlayerCards();
-
-    // Demarrer une nouvelle partie
     startNewGame();
 }
 
@@ -299,11 +784,14 @@ function updateImpostorInfo() {
     const impostors = gameConfig.impostorCount;
     const civils = count - impostors;
 
-    const infoText = `${count} joueurs = ${impostors} imposteur${impostors > 1 ? 's' : ''}`;
+    const infoText = impostors > 1 
+        ? t('playersInfoPlural', count, impostors)
+        : t('playersInfo', count, impostors);
     document.getElementById('impostorsInfo').textContent = infoText;
 
-    const footerText = `${civils} civil${civils > 1 ? 's' : ''} - ${impostors} imposteur${impostors > 1 ? 's' : ''}`;
-    document.getElementById('footerInfo').textContent = footerText;
+    const civilLabel = civils > 1 ? t('civils') : t('civil');
+    const impostorLabel = impostors > 1 ? t('impostors') : t('impostor');
+    document.getElementById('footerInfo').textContent = t('footerInfo', civils, civilLabel, impostors, impostorLabel);
 }
 
 // Generer les cartes joueurs dynamiquement
@@ -321,7 +809,7 @@ function generatePlayerCards() {
             <div class="card-inner">
                 <div class="card-front">
                     <span class="player-number">${i}</span>
-                    <span class="tap-text">Appuie pour voir</span>
+                    <span class="tap-text">${t('tapToSee')}</span>
                 </div>
                 <div class="card-back">
                     <img class="card-image" id="image${i}" src="" alt="">
@@ -340,7 +828,6 @@ function startNewGame() {
     const playerCount = gameConfig.playerCount;
     const impostorCount = gameConfig.impostorCount;
 
-    // Creer le tableau des roles
     let roles = [];
     for (let i = 0; i < playerCount - impostorCount; i++) {
         roles.push(civilCard);
@@ -349,39 +836,36 @@ function startNewGame() {
         roles.push(impostorCard);
     }
 
-    // Melanger les roles
     roles = shuffle(roles);
 
     gameState.cards = roles;
     gameState.impostorIndices = roles.map((card, idx) => card.nom === impostorCard.nom ? idx : -1).filter(idx => idx !== -1);
     gameState.revealed = new Array(playerCount).fill(false);
 
-    // Mettre a jour l'affichage
     for (let i = 1; i <= playerCount; i++) {
         const card = gameState.cards[i - 1];
         const wordEl = document.getElementById(`word${i}`);
         const imageEl = document.getElementById(`image${i}`);
         const playerEl = document.getElementById(`player${i}`);
 
-        if (wordEl) wordEl.textContent = card.nom;
+        if (wordEl) wordEl.textContent = translateCardName(card.nom);
         if (imageEl) {
             imageEl.src = card.customUrl ? card.image : IMAGE_BASE_URL + card.image + ".png";
-            imageEl.alt = card.nom;
+            imageEl.alt = translateCardName(card.nom);
         }
         if (playerEl) playerEl.classList.remove('revealed');
     }
 
-    // Choisir aleatoirement le joueur qui commence
     const startingPlayer = randomInt(playerCount) + 1;
     const startingEl = document.getElementById('startingPlayer');
     if (startingEl) {
-        startingEl.textContent = `🎯 Le joueur ${startingPlayer} commence !`;
+        startingEl.textContent = t('startingPlayer', startingPlayer);
     }
 
     const btn = document.getElementById('newGameBtn');
-    btn.textContent = "C'est parti !";
+    btn.textContent = t('letsGo');
     setTimeout(() => {
-        btn.textContent = "Nouvelle partie";
+        btn.textContent = t('newGame');
     }, 1200);
 }
 
@@ -396,13 +880,10 @@ function revealCard(playerNum) {
         card.classList.add('revealed');
         gameState.revealed[playerNum - 1] = true;
 
-        // Afficher le splash 67 d'abord
         showSplash67(() => {
-            // Puis ouvrir la modal avec la carte en grand
             openModal(playerNum);
         });
 
-        // Auto-cacher: splash(0.8s) + modal(2s) + delai(0.2s) = 3s
         setTimeout(() => {
             if (gameState.revealed[playerNum - 1]) {
                 card.classList.remove('revealed');
@@ -412,12 +893,11 @@ function revealCard(playerNum) {
     }
 }
 
-// Afficher le splash 67 avant de montrer la carte
+// Afficher le splash 67
 function showSplash67(callback) {
     const splash = document.getElementById('splash67');
     splash.classList.add('active');
 
-    // Fermer apres 0.8 secondes et executer le callback
     setTimeout(() => {
         splash.classList.remove('active');
         if (callback) callback();
@@ -427,23 +907,19 @@ function showSplash67(callback) {
 // Ouvrir la modal avec la carte agrandie
 function openModal(playerNum) {
     const cardData = gameState.cards[playerNum - 1];
-    const isImpostor = gameState.impostorIndices.includes(playerNum - 1);
 
     const modal = document.getElementById('cardModal');
     const modalImage = document.getElementById('modalImage');
     const modalWord = document.getElementById('modalWord');
     const modalRole = document.getElementById('modalRole');
 
-    // Mettre a jour le contenu
     modalImage.src = cardData.customUrl ? cardData.image : IMAGE_BASE_URL + cardData.image + ".png";
-    modalImage.alt = cardData.nom;
-    modalWord.textContent = cardData.nom;
-    modalRole.textContent = `Joueur ${playerNum}`;
+    modalImage.alt = translateCardName(cardData.nom);
+    modalWord.textContent = translateCardName(cardData.nom);
+    modalRole.textContent = `${t('player')} ${playerNum}`;
 
-    // Afficher la modal
     modal.classList.add('active');
 
-    // Fermer automatiquement apres 2 secondes
     setTimeout(() => {
         closeModal();
     }, 2000);
@@ -455,9 +931,22 @@ function closeModal() {
     modal.classList.remove('active');
 }
 
+// Ouvrir/fermer la modal des règles
+function toggleRulesModal() {
+    const modal = document.getElementById('rulesModal');
+    modal.classList.toggle('active');
+}
+
 // Initialiser au chargement
 document.addEventListener('DOMContentLoaded', () => {
-    selectPlayers(3); // Par defaut 3 joueurs
+    // Charger la langue sauvegardée
+    const savedLang = localStorage.getItem('undercover-language');
+    if (savedLang && TRANSLATIONS[savedLang]) {
+        currentLanguage = savedLang;
+    }
+    
+    selectPlayers(3);
+    updateInterface();
 });
 
 // ============================================
@@ -465,20 +954,17 @@ document.addEventListener('DOMContentLoaded', () => {
 // ============================================
 
 let isMusicPlaying = false;
-let youtubePlayer = null;
 
 function toggleMusic() {
     const btn = document.getElementById('musicBtn');
     const iframe = document.getElementById('youtubePlayer');
 
     if (!isMusicPlaying) {
-        // Demarrer la musique
         iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
         btn.textContent = '🔊';
         btn.classList.add('playing');
         isMusicPlaying = true;
     } else {
-        // Arreter la musique
         iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
         btn.textContent = '🔇';
         btn.classList.remove('playing');
