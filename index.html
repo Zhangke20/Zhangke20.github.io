@@ -46,16 +46,17 @@
         <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="meme67" style="top: 92%; left: 8%;">
     </div>
 
-    <!-- Boutons flottants -->
-    <button class="music-btn" id="musicBtn" onclick="toggleMusic()">
-        🔇
-    </button>
+    <!-- Boutons flottants en haut -->
+    <button class="music-btn" id="musicBtn" onclick="toggleMusic()">🔇</button>
+    <button class="rules-btn" id="rulesBtn" onclick="toggleRulesModal()">Règles</button>
     
-    <button class="rules-btn" id="rulesBtn" onclick="toggleRulesModal()">
-        Règles
-    </button>
+    <!-- Sélecteur de langue sous le bouton règles -->
+    <div class="lang-select" id="langSelect">
+        <button class="lang-btn selected" data-lang="fr" onclick="setLanguage('fr')">🇫🇷 FR</button>
+        <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">🇬🇧 EN</button>
+    </div>
 
-    <!-- YouTube player cache pour la musique -->
+    <!-- YouTube player caché -->
     <iframe id="youtubePlayer" src="https://www.youtube.com/embed/ogk3KOcF4Fc?enablejsapi=1&loop=1&playlist=ogk3KOcF4Fc"
         allow="autoplay" style="display: none;">
     </iframe>
@@ -67,53 +68,34 @@
         </header>
 
         <main>
-            <!-- Sélecteur de langue -->
-            <div class="lang-select" id="langSelect">
-                <p class="select-title">Langue / Language</p>
-                <div class="lang-buttons">
-                    <button class="lang-btn selected" data-lang="fr" onclick="setLanguage('fr')">
-                        🇫🇷 FR
-                    </button>
-                    <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">
-                        🇬🇧 EN
-                    </button>
-                </div>
-            </div>
-
-            <!-- Menu de selection du nombre de joueurs -->
-            <div class="player-select" id="playerSelect">
-                <p class="select-title">Nombre de joueurs</p>
-                <div class="select-buttons">
-                    <button class="select-btn" onclick="selectPlayers(3)">3</button>
-                    <button class="select-btn" onclick="selectPlayers(4)">4</button>
-                    <button class="select-btn" onclick="selectPlayers(5)">5</button>
+            <!-- Section Paramètres - Joueurs et Mode -->
+            <div class="settings-section" id="settingsSection">
+                <div class="settings-row">
+                    <div class="setting-group">
+                        <p class="select-title" id="playersLabel">Joueurs</p>
+                        <div class="select-buttons">
+                            <button class="select-btn" onclick="selectPlayers(3)">3</button>
+                            <button class="select-btn" onclick="selectPlayers(4)">4</button>
+                            <button class="select-btn" onclick="selectPlayers(5)">5</button>
+                        </div>
+                    </div>
+                    <div class="setting-group">
+                        <p class="select-title" id="modeLabel">Mode</p>
+                        <div class="mode-buttons">
+                            <button class="mode-btn selected" data-mode="random" onclick="setGameMode('random')" title="Aléatoire">🎲</button>
+                            <button class="mode-btn" data-mode="similar" onclick="setGameMode('similar')" title="Similaires">🎯</button>
+                        </div>
+                    </div>
                 </div>
                 <p class="impostors-info" id="impostorsInfo">3 joueurs = 1 imposteur</p>
-            </div>
-
-            <!-- Selecteur de mode de jeu -->
-            <div class="mode-select" id="modeSelect">
-                <p class="select-title">Mode de jeu</p>
-                <div class="mode-buttons">
-                    <button class="mode-btn selected" data-mode="random" onclick="setGameMode('random')">
-                        🎲 Aléatoire
-                    </button>
-                    <button class="mode-btn" data-mode="similar" onclick="setGameMode('similar')">
-                        🎯 Similaires
-                    </button>
-                </div>
                 <p class="mode-info" id="modeInfo">Deux cartes complètement différentes</p>
             </div>
 
-            <div class="game-board" id="gameBoard">
-                <!-- Les cartes seront generees dynamiquement -->
-            </div>
+            <div class="game-board" id="gameBoard"></div>
 
             <p class="starting-player" id="startingPlayer">Le joueur 1 commence !</p>
 
-            <button class="new-game-btn" id="newGameBtn" onclick="startNewGame()">
-                Nouvelle partie
-            </button>
+            <button class="new-game-btn" id="newGameBtn" onclick="startNewGame()">Nouvelle partie</button>
         </main>
 
         <footer>
@@ -154,7 +136,7 @@
         </div>
     </div>
 
-    <!-- Splash 67 avant de voir la carte -->
+    <!-- Splash 67 -->
     <div class="splash-67" id="splash67">
         <img src="https://media.tenor.com/DSN7_kzGLO8AAAAi/67-meme-67.gif" class="splash-67-img" alt="67">
     </div>

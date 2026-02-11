@@ -7,6 +7,8 @@ const TRANSLATIONS = {
         // Interface
         title: "UNDERCOVER",
         subtitle: "Clash Royale Edition",
+        playersLabel: "Joueurs",
+        modeLabel: "Mode",
         playerCount: "Nombre de joueurs",
         gameMode: "Mode de jeu",
         randomMode: "🎲 Aléatoire",
@@ -139,6 +141,8 @@ const TRANSLATIONS = {
         // Interface
         title: "UNDERCOVER",
         subtitle: "Clash Royale Edition",
+        playersLabel: "Players",
+        modeLabel: "Mode",
         playerCount: "Number of players",
         gameMode: "Game mode",
         randomMode: "🎲 Random",
@@ -316,13 +320,11 @@ function updateInterface() {
     document.querySelector('h1').textContent = t('title');
     document.querySelector('.subtitle').textContent = t('subtitle');
     
-    // Sélection joueurs
-    document.querySelector('#playerSelect .select-title').textContent = t('playerCount');
-    
-    // Sélection mode
-    document.querySelector('#modeSelect .select-title').textContent = t('gameMode');
-    document.querySelector('.mode-btn[data-mode="random"]').textContent = t('randomMode');
-    document.querySelector('.mode-btn[data-mode="similar"]').textContent = t('similarMode');
+    // Labels Joueurs et Mode
+    const playersLabel = document.getElementById('playersLabel');
+    const modeLabel = document.getElementById('modeLabel');
+    if (playersLabel) playersLabel.textContent = t('playersLabel');
+    if (modeLabel) modeLabel.textContent = t('modeLabel');
     
     // Info mode
     const modeInfo = document.getElementById('modeInfo');
@@ -341,8 +343,13 @@ function updateInterface() {
     
     // Bouton nouvelle partie
     const newGameBtn = document.getElementById('newGameBtn');
-    if (newGameBtn && !newGameBtn.textContent.includes("parti") && !newGameBtn.textContent.includes("go")) {
-        newGameBtn.textContent = t('newGame');
+    if (newGameBtn) {
+        // Ne changer que si ce n'est pas le texte d'animation "C'est parti!" / "Let's go!"
+        const currentText = newGameBtn.textContent.toLowerCase();
+        const isAnimating = currentText.includes("parti") || currentText.includes("go");
+        if (!isAnimating) {
+            newGameBtn.textContent = t('newGame');
+        }
     }
     
     // Info imposteurs
