@@ -8,6 +8,7 @@ const TRANSLATIONS = {
         title: "UNDERCOVER",
         subtitle: "Clash Royale Edition",
         playersLabel: "Joueurs",
+        impostorsLabel: "Imposteurs",
         modeLabel: "Mode",
         playerCount: "Nombre de joueurs",
         gameMode: "Mode de jeu",
@@ -29,7 +30,17 @@ const TRANSLATIONS = {
         playersInfo: "{0} joueurs = {1} imposteur",
         playersInfoPlural: "{0} joueurs = {1} imposteurs",
         footerInfo: "{0} {1} - {2} {3}",
-        
+
+        // Vote & Elimination
+        votePhaseBtn: "🗳️ Passer au vote",
+        voteTitle: "🗳️ Phase de vote",
+        voteSubtitle: "Choisissez un joueur à éliminer",
+        eliminatedMsg: "Joueur {0} éliminé — {1}",
+        civilsWin: "🎉 Les Civils gagnent !",
+        impostorsWin: "🎭 Les Imposteurs gagnent !",
+        replay: "🔄 Rejouer",
+        eliminated: "Éliminé",
+
         // Règles du jeu
         rulesTitle: "📜 Règles du jeu",
         rulesText: [
@@ -42,13 +53,15 @@ const TRANSLATIONS = {
             "2. Tous les civils ont la MÊME carte",
             "3. L'imposteur a une carte DIFFÉRENTE (proche en mode Similaire)",
             "4. Les joueurs décrivent leur carte sans la nommer directement",
-            "5. Votez pour éliminer qui vous pensez être l'imposteur !",
+            "5. Appuyez sur \"Passer au vote\" puis cliquez un numéro pour éliminer",
+            "6. Le rôle du joueur éliminé est dévoilé",
+            "7. La partie continue jusqu'à ce qu'un camp gagne !",
             "",
             "🏆 <strong>Victoire :</strong>",
-            "• Civils gagnent si l'imposteur est éliminé",
-            "• L'imposteur gagne s'il survit ou si les civils s'accusent entre eux !"
+            "• Civils gagnent si tous les imposteurs sont éliminés",
+            "• Imposteurs gagnent s'ils égalent ou dépassent les civils restants !"
         ],
-        
+
         // Noms des cartes
         cards: {
             "Archers": "Archers",
@@ -142,6 +155,7 @@ const TRANSLATIONS = {
         title: "UNDERCOVER",
         subtitle: "Clash Royale Edition",
         playersLabel: "Players",
+        impostorsLabel: "Impostors",
         modeLabel: "Mode",
         playerCount: "Number of players",
         gameMode: "Game mode",
@@ -163,7 +177,17 @@ const TRANSLATIONS = {
         playersInfo: "{0} players = {1} impostor",
         playersInfoPlural: "{0} players = {1} impostors",
         footerInfo: "{0} {1} - {2} {3}",
-        
+
+        // Vote & Elimination
+        votePhaseBtn: "🗳️ Vote now",
+        voteTitle: "🗳️ Voting Phase",
+        voteSubtitle: "Choose a player to eliminate",
+        eliminatedMsg: "Player {0} eliminated — {1}",
+        civilsWin: "🎉 Civilians win!",
+        impostorsWin: "🎭 Impostors win!",
+        replay: "🔄 Play again",
+        eliminated: "Eliminated",
+
         // Règles du jeu
         rulesTitle: "📜 Game Rules",
         rulesText: [
@@ -176,13 +200,15 @@ const TRANSLATIONS = {
             "2. All civilians have the SAME card",
             "3. The impostor has a DIFFERENT card (close one in Similar mode)",
             "4. Players describe their card without naming it directly",
-            "5. Vote to eliminate who you think is the impostor!",
+            "5. Press \"Vote now\" then click a number to eliminate",
+            "6. The eliminated player's role is revealed",
+            "7. The game continues until one team wins!",
             "",
             "🏆 <strong>Victory:</strong>",
-            "• Civilians win if the impostor is eliminated",
-            "• The impostor wins if they survive or if civilians accuse each other!"
+            "• Civilians win if all impostors are eliminated",
+            "• Impostors win if they equal or outnumber remaining civilians!"
         ],
-        
+
         // Noms des cartes
         cards: {
             "Archers": "Archers",
@@ -280,12 +306,12 @@ let currentLanguage = 'fr';
 function t(key, ...args) {
     const translations = TRANSLATIONS[currentLanguage];
     let text = translations[key] || key;
-    
+
     // Remplacer les placeholders {0}, {1}, etc.
     args.forEach((arg, index) => {
         text = text.replace(`{${index}}`, arg);
     });
-    
+
     return text;
 }
 
@@ -297,7 +323,7 @@ function translateCardName(frenchName) {
 // Changer la langue
 function setLanguage(lang) {
     currentLanguage = lang;
-    
+
     // Mettre à jour les boutons de langue
     document.querySelectorAll('.lang-btn').forEach(btn => {
         if (btn.dataset.lang === lang) {
@@ -306,10 +332,10 @@ function setLanguage(lang) {
             btn.classList.remove('selected');
         }
     });
-    
+
     // Mettre à jour tous les textes de l'interface
     updateInterface();
-    
+
     // Sauvegarder la préférence
     localStorage.setItem('undercover-language', lang);
 }
@@ -319,13 +345,15 @@ function updateInterface() {
     // Titres
     document.querySelector('h1').textContent = t('title');
     document.querySelector('.subtitle').textContent = t('subtitle');
-    
+
     // Labels Joueurs et Mode
     const playersLabel = document.getElementById('playersLabel');
     const modeLabel = document.getElementById('modeLabel');
     if (playersLabel) playersLabel.textContent = t('playersLabel');
     if (modeLabel) modeLabel.textContent = t('modeLabel');
-    
+    const impostorsLabel = document.getElementById('impostorsLabel');
+    if (impostorsLabel) impostorsLabel.textContent = t('impostorsLabel');
+
     // Info mode
     const modeInfo = document.getElementById('modeInfo');
     if (modeInfo) {
@@ -335,12 +363,12 @@ function updateInterface() {
             modeInfo.textContent = t('randomInfo');
         }
     }
-    
+
     // Texte des cartes
     document.querySelectorAll('.tap-text').forEach(el => {
         el.textContent = t('tapToSee');
     });
-    
+
     // Bouton nouvelle partie
     const newGameBtn = document.getElementById('newGameBtn');
     if (newGameBtn) {
@@ -351,10 +379,10 @@ function updateInterface() {
             newGameBtn.textContent = t('newGame');
         }
     }
-    
+
     // Info imposteurs
     updateImpostorInfo();
-    
+
     // Joueur qui commence
     const startingEl = document.getElementById('startingPlayer');
     if (startingEl && startingEl.textContent.includes('joueur') || startingEl.textContent.includes('Player')) {
@@ -363,7 +391,7 @@ function updateInterface() {
             startingEl.textContent = t('startingPlayer', match[0]);
         }
     }
-    
+
     // Mettre à jour les noms des cartes affichées
     for (let i = 1; i <= gameConfig.playerCount; i++) {
         const wordEl = document.getElementById(`word${i}`);
@@ -371,24 +399,32 @@ function updateInterface() {
             wordEl.textContent = translateCardName(gameState.cards[i - 1].nom);
         }
     }
-    
+
+    // Vote UI
+    const votePhaseBtn = document.getElementById('votePhaseBtn');
+    if (votePhaseBtn) votePhaseBtn.textContent = t('votePhaseBtn');
+    const voteTitle = document.getElementById('voteTitle');
+    if (voteTitle) voteTitle.textContent = t('voteTitle');
+    const voteSubtitle = document.getElementById('voteSubtitle');
+    if (voteSubtitle) voteSubtitle.textContent = t('voteSubtitle');
+
     // Bouton règles
     const rulesBtn = document.getElementById('rulesBtn');
     if (rulesBtn) {
         rulesBtn.textContent = t('rules');
     }
-    
+
     // Modal règles
     const rulesTitle = document.getElementById('rulesTitle');
     if (rulesTitle) {
         rulesTitle.textContent = t('rulesTitle');
     }
-    
+
     const rulesContent = document.getElementById('rulesContent');
     if (rulesContent) {
         rulesContent.innerHTML = t('rulesText').join('<br>');
     }
-    
+
     const rulesClose = document.getElementById('rulesClose');
     if (rulesClose) {
         rulesClose.textContent = t('close');
@@ -688,7 +724,10 @@ let gameConfig = {
 let gameState = {
     cards: [],
     impostorIndices: [],
-    revealed: []
+    revealed: [],
+    eliminatedPlayers: [],
+    gamePhase: 'cards', // 'cards' | 'vote' | 'finished'
+    impostorCardName: ''
 };
 
 // Random robuste
@@ -764,24 +803,48 @@ function setGameMode(mode) {
 function selectPlayers(count) {
     gameConfig.playerCount = count;
 
-    if (count === 5) {
-        gameConfig.impostorCount = 2;
-    } else {
-        gameConfig.impostorCount = 1;
+    // Mettre à jour le dropdown joueurs
+    const dropdown = document.getElementById('playerDropdown');
+    if (dropdown) dropdown.value = count;
+
+    // Recalculer le max d'imposteurs et rebuilder le dropdown
+    const maxImpostors = Math.floor(count / 2);
+    const impDropdown = document.getElementById('impostorDropdown');
+    if (impDropdown) {
+        const currentVal = gameConfig.impostorCount;
+        impDropdown.innerHTML = '';
+        for (let i = 1; i <= maxImpostors; i++) {
+            const opt = document.createElement('option');
+            opt.value = i;
+            opt.textContent = i;
+            impDropdown.appendChild(opt);
+        }
+        // Garder la valeur précédente si possible, sinon défaut intelligent
+        if (currentVal >= 1 && currentVal <= maxImpostors) {
+            gameConfig.impostorCount = currentVal;
+        } else {
+            // Défaut intelligent
+            if (count <= 4) gameConfig.impostorCount = 1;
+            else if (count <= 7) gameConfig.impostorCount = 2;
+            else gameConfig.impostorCount = 3;
+        }
+        impDropdown.value = gameConfig.impostorCount;
     }
 
     updateImpostorInfo();
-
-    document.querySelectorAll('.select-btn').forEach((btn, index) => {
-        const btnCount = index + 3;
-        if (btnCount === count) {
-            btn.classList.add('selected');
-        } else {
-            btn.classList.remove('selected');
-        }
-    });
-
     generatePlayerCards();
+    startNewGame();
+}
+
+// Selectionner le nombre d'imposteurs manuellement
+function selectImpostors(count) {
+    const maxImpostors = Math.floor(gameConfig.playerCount / 2);
+    gameConfig.impostorCount = Math.min(Math.max(1, count), maxImpostors);
+
+    const impDropdown = document.getElementById('impostorDropdown');
+    if (impDropdown) impDropdown.value = gameConfig.impostorCount;
+
+    updateImpostorInfo();
     startNewGame();
 }
 
@@ -791,7 +854,7 @@ function updateImpostorInfo() {
     const impostors = gameConfig.impostorCount;
     const civils = count - impostors;
 
-    const infoText = impostors > 1 
+    const infoText = impostors > 1
         ? t('playersInfoPlural', count, impostors)
         : t('playersInfo', count, impostors);
     document.getElementById('impostorsInfo').textContent = infoText;
@@ -848,6 +911,9 @@ function startNewGame() {
     gameState.cards = roles;
     gameState.impostorIndices = roles.map((card, idx) => card.nom === impostorCard.nom ? idx : -1).filter(idx => idx !== -1);
     gameState.revealed = new Array(playerCount).fill(false);
+    gameState.eliminatedPlayers = [];
+    gameState.gamePhase = 'cards';
+    gameState.impostorCardName = impostorCard.nom;
 
     for (let i = 1; i <= playerCount; i++) {
         const card = gameState.cards[i - 1];
@@ -860,14 +926,37 @@ function startNewGame() {
             imageEl.src = card.customUrl ? card.image : IMAGE_BASE_URL + card.image + ".png";
             imageEl.alt = translateCardName(card.nom);
         }
-        if (playerEl) playerEl.classList.remove('revealed');
+        if (playerEl) {
+            playerEl.classList.remove('revealed', 'eliminated');
+            playerEl.style.display = '';
+        }
     }
 
     const startingPlayer = randomInt(playerCount) + 1;
     const startingEl = document.getElementById('startingPlayer');
     if (startingEl) {
         startingEl.textContent = t('startingPlayer', startingPlayer);
+        startingEl.style.display = '';
     }
+
+    // Show vote phase button, hide vote section
+    const votePhaseBtn = document.getElementById('votePhaseBtn');
+    if (votePhaseBtn) {
+        votePhaseBtn.style.display = 'block';
+        votePhaseBtn.textContent = t('votePhaseBtn');
+    }
+    const voteSection = document.getElementById('voteSection');
+    if (voteSection) voteSection.style.display = 'none';
+
+    // Hide winner banner
+    const winnerBanner = document.getElementById('winnerBanner');
+    if (winnerBanner) winnerBanner.classList.remove('active');
+
+    // Clear elimination log
+    const elimLog = document.getElementById('eliminationLog');
+    if (elimLog) elimLog.innerHTML = '';
+
+    // Hide settings during game? No, keep them visible
 
     const btn = document.getElementById('newGameBtn');
     btn.textContent = t('letsGo');
@@ -878,6 +967,10 @@ function startNewGame() {
 
 // Revealer/cacher une carte
 function revealCard(playerNum) {
+    // Ne pas permettre de révéler les cartes des éliminés
+    if (gameState.eliminatedPlayers.includes(playerNum - 1)) return;
+    if (gameState.gamePhase === 'finished') return;
+
     const card = document.getElementById(`player${playerNum}`);
 
     if (card.classList.contains('revealed')) {
@@ -898,6 +991,157 @@ function revealCard(playerNum) {
             }
         }, 3000);
     }
+}
+
+// ============================================
+// SYSTEME DE VOTE ET ELIMINATION
+// ============================================
+
+// Passer en phase de vote
+function startVotePhase() {
+    if (gameState.gamePhase === 'finished') return;
+    gameState.gamePhase = 'vote';
+
+    // Cacher toutes les cartes révélées
+    for (let i = 1; i <= gameConfig.playerCount; i++) {
+        const card = document.getElementById(`player${i}`);
+        if (card) {
+            card.classList.remove('revealed');
+            gameState.revealed[i - 1] = false;
+        }
+    }
+
+    // Cacher le bouton "Passer au vote"
+    const votePhaseBtn = document.getElementById('votePhaseBtn');
+    if (votePhaseBtn) votePhaseBtn.style.display = 'none';
+
+    // Afficher la section de vote
+    const voteSection = document.getElementById('voteSection');
+    if (voteSection) voteSection.style.display = 'block';
+
+    // Générer les boutons de vote
+    generateVoteButtons();
+}
+
+// Générer les boutons de vote pour les joueurs encore en vie
+function generateVoteButtons() {
+    const voteButtons = document.getElementById('voteButtons');
+    if (!voteButtons) return;
+    voteButtons.innerHTML = '';
+
+    for (let i = 0; i < gameConfig.playerCount; i++) {
+        if (gameState.eliminatedPlayers.includes(i)) continue;
+
+        const btn = document.createElement('button');
+        btn.className = 'vote-btn';
+        btn.textContent = (i + 1);
+        btn.onclick = () => eliminatePlayer(i + 1);
+        voteButtons.appendChild(btn);
+    }
+}
+
+// Éliminer un joueur
+function eliminatePlayer(playerNum) {
+    if (gameState.gamePhase === 'finished') return;
+    const idx = playerNum - 1;
+    if (gameState.eliminatedPlayers.includes(idx)) return;
+
+    gameState.eliminatedPlayers.push(idx);
+
+    // Déterminer le rôle
+    const isImpostor = gameState.impostorIndices.includes(idx);
+    const roleName = isImpostor ? t('impostor').toUpperCase() : t('civil').toUpperCase();
+    const roleClass = isImpostor ? 'role-impostor' : 'role-civil';
+
+    // Griser la carte du joueur
+    const card = document.getElementById(`player${playerNum}`);
+    if (card) {
+        card.classList.add('eliminated');
+        card.classList.remove('revealed');
+        // Remplacer le contenu de la face avant
+        const front = card.querySelector('.card-front');
+        if (front) {
+            front.innerHTML = `
+                <span class="player-number eliminated-number">${playerNum}</span>
+                <span class="eliminated-badge ${roleClass}">${roleName}</span>
+                <span class="eliminated-text">${t('eliminated')}</span>
+            `;
+        }
+    }
+
+    // Ajouter au log d'élimination
+    const elimLog = document.getElementById('eliminationLog');
+    if (elimLog) {
+        const entry = document.createElement('div');
+        entry.className = `elim-entry ${roleClass}`;
+        entry.innerHTML = `<span class="elim-icon">${isImpostor ? '🎭' : '👤'}</span> ${t('eliminatedMsg', playerNum, roleName)}`;
+        elimLog.appendChild(entry);
+    }
+
+    // Vérifier la condition de victoire
+    const result = checkWinCondition();
+    if (result) {
+        showWinner(result);
+    } else {
+        // Retourner en phase de cartes (discussion)
+        gameState.gamePhase = 'cards';
+        const voteSection = document.getElementById('voteSection');
+        if (voteSection) voteSection.style.display = 'none';
+        const votePhaseBtn = document.getElementById('votePhaseBtn');
+        if (votePhaseBtn) votePhaseBtn.style.display = 'block';
+    }
+}
+
+// Vérifier la condition de victoire
+function checkWinCondition() {
+    let aliveImpostors = 0;
+    let aliveCivils = 0;
+
+    for (let i = 0; i < gameConfig.playerCount; i++) {
+        if (gameState.eliminatedPlayers.includes(i)) continue;
+        if (gameState.impostorIndices.includes(i)) {
+            aliveImpostors++;
+        } else {
+            aliveCivils++;
+        }
+    }
+
+    if (aliveImpostors === 0) return 'civils';
+    if (aliveImpostors >= aliveCivils) return 'impostors';
+    return null;
+}
+
+// Afficher le gagnant
+function showWinner(team) {
+    gameState.gamePhase = 'finished';
+
+    const banner = document.getElementById('winnerBanner');
+    const emoji = document.getElementById('winnerEmoji');
+    const text = document.getElementById('winnerText');
+
+    // Cacher le vote
+    const voteSection = document.getElementById('voteSection');
+    if (voteSection) voteSection.style.display = 'none';
+    const votePhaseBtn = document.getElementById('votePhaseBtn');
+    if (votePhaseBtn) votePhaseBtn.style.display = 'none';
+
+    if (team === 'civils') {
+        emoji.textContent = '🎉';
+        text.textContent = t('civilsWin');
+        banner.className = 'winner-banner active civils-win';
+    } else {
+        emoji.textContent = '🎭';
+        text.textContent = t('impostorsWin');
+        banner.className = 'winner-banner active impostors-win';
+    }
+}
+
+// Reset complet pour rejouer
+function resetFullGame() {
+    const banner = document.getElementById('winnerBanner');
+    if (banner) banner.classList.remove('active');
+    generatePlayerCards();
+    startNewGame();
 }
 
 // Afficher le splash 67
@@ -951,7 +1195,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (savedLang && TRANSLATIONS[savedLang]) {
         currentLanguage = savedLang;
     }
-    
+
+    // Initialiser le dropdown
+    const dropdown = document.getElementById('playerDropdown');
+    if (dropdown) dropdown.value = '3';
+
     selectPlayers(3);
     updateInterface();
 });

@@ -49,7 +49,7 @@
     <!-- Boutons flottants en haut -->
     <button class="music-btn" id="musicBtn" onclick="toggleMusic()">🔇</button>
     <button class="rules-btn" id="rulesBtn" onclick="toggleRulesModal()">Règles</button>
-    
+
     <!-- Sélecteur de langue sous le bouton règles -->
     <div class="lang-select" id="langSelect">
         <button class="lang-btn selected" data-lang="fr" onclick="setLanguage('fr')">🇫🇷 FR</button>
@@ -73,17 +73,34 @@
                 <div class="settings-row">
                     <div class="setting-group">
                         <p class="select-title" id="playersLabel">Joueurs</p>
-                        <div class="select-buttons">
-                            <button class="select-btn" onclick="selectPlayers(3)">3</button>
-                            <button class="select-btn" onclick="selectPlayers(4)">4</button>
-                            <button class="select-btn" onclick="selectPlayers(5)">5</button>
+                        <div class="select-dropdown-wrap">
+                            <select class="player-dropdown" id="playerDropdown"
+                                onchange="selectPlayers(parseInt(this.value))">
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="setting-group">
+                        <p class="select-title" id="impostorsLabel">Imposteurs</p>
+                        <div class="select-dropdown-wrap">
+                            <select class="player-dropdown impostor-dropdown" id="impostorDropdown"
+                                onchange="selectImpostors(parseInt(this.value))">
+                                <option value="1">1</option>
+                            </select>
                         </div>
                     </div>
                     <div class="setting-group">
                         <p class="select-title" id="modeLabel">Mode</p>
                         <div class="mode-buttons">
-                            <button class="mode-btn selected" data-mode="random" onclick="setGameMode('random')" title="Aléatoire">🎲</button>
-                            <button class="mode-btn" data-mode="similar" onclick="setGameMode('similar')" title="Similaires">🎯</button>
+                            <button class="mode-btn selected" data-mode="random" onclick="setGameMode('random')"
+                                title="Aléatoire">🎲</button>
+                            <button class="mode-btn" data-mode="similar" onclick="setGameMode('similar')"
+                                title="Similaires">🎯</button>
                         </div>
                     </div>
                 </div>
@@ -95,7 +112,30 @@
 
             <p class="starting-player" id="startingPlayer">Le joueur 1 commence !</p>
 
+            <!-- Zone d'élimination -->
+            <div class="elimination-log" id="eliminationLog"></div>
+
+            <!-- Section de vote -->
+            <div class="vote-section" id="voteSection" style="display:none;">
+                <p class="vote-title" id="voteTitle">🗳️ Phase de vote</p>
+                <p class="vote-subtitle" id="voteSubtitle">Choisissez un joueur à éliminer</p>
+                <div class="vote-buttons" id="voteButtons"></div>
+            </div>
+
+            <!-- Bouton pour passer au vote -->
+            <button class="vote-phase-btn" id="votePhaseBtn" onclick="startVotePhase()" style="display:none;">🗳️ Passer
+                au vote</button>
+
             <button class="new-game-btn" id="newGameBtn" onclick="startNewGame()">Nouvelle partie</button>
+
+            <!-- Bannière de victoire -->
+            <div class="winner-banner" id="winnerBanner">
+                <div class="winner-content">
+                    <p class="winner-emoji" id="winnerEmoji">🎉</p>
+                    <p class="winner-text" id="winnerText">Civils gagnent !</p>
+                    <button class="winner-replay-btn" onclick="resetFullGame()">🔄 Rejouer</button>
+                </div>
+            </div>
         </main>
 
         <footer>
